@@ -1,7 +1,7 @@
 from grongier.pex import BusinessOperation
 import iris
 
-from msg import HFRequest,HFResponse,MLRequest,MLResponse
+from msg import MLRequest,MLResponse
 
 from os.path import exists
 from os import mkdir
@@ -21,25 +21,7 @@ from bs4 import BeautifulSoup as BS
 
 from transformers import pipeline
 
-class HFOperation(BusinessOperation):
-    def on_init(self):
-        return
-
-    def on_message(self,request):
-        self.log_info(str(request))
-        return
-
-    def on_hfrequest(self,request:HFRequest):
-        response = HFResponse(self.query(request.api_key,request.api_url,request.payload))
-        return response
-        
-    def query(self,api_key,api_url,payload):
-        data = json.dumps(payload)
-        headers = {"Authorization": f"Bearer {api_key}"}
-        response = requests.request("POST", api_url, headers=headers, data=data)
-        return json.loads(response.content.decode("utf-8"))
-
-class MLOperation(BusinessOperation):
+class TuningOperation(BusinessOperation):
     def on_init(self):
         if not hasattr(self,"path"):
             self.path = "/irisdev/app/src/model/"
@@ -57,9 +39,6 @@ class MLOperation(BusinessOperation):
                 for el in elem:
                     href = el['href']
                     tmp_name = href.split("/")[-1]
-                    # Check if .gitignore or LICENSE file or readme file
-                    # if tmp_name[0] != "." and tmp_name.lower() != "license" and tmp_name.split(".")[-1] != "md":
-                    #     self.download(tmp_name,"https://huggingface.co" + href)
                     self.download(tmp_name,"https://huggingface.co" + href)
                 self.log_info("All downloads are completed or cached ; loading the model and the config from folder " + self.path + self.name)
             except Exception as e:
@@ -133,71 +112,5 @@ class MLOperation(BusinessOperation):
         except Exception as e:
             self.log_info(str(e))
 
-        return resp
-    
-    def object_detection_segmentation(self,req):
-        try:
-            image = Image.open(requests.get(req.url, stream=True).raw)
-        except:
-            try:
-                image = Image.open(req.url)
-            except Exception as e:
-                self.log_info(str(e))
-
-        res = self.generator(image)
-        resp = MLResponse(res)
-        try:
-            # Drawing the bounding box and the label on the image for each detected object
-            if res[0].__contains__("box"):
-                resp = iris.cls('PEX.Msg.ImageDisplay')._New()
-                drawimage = ImageDraw.Draw(image)
-                for object in res:
-                    r = random.randint(0,255)
-                    g = random.randint(0,255)
-                    b = random.randint(0,255)
-                    rgb = (r,g,b)
-                    xmin,ymin,xmax,ymax = object["box"].values()
-                    label = object["label"]
-                    drawimage.rectangle(((xmin,ymin),(xmax,ymax)),outline=rgb,width=2)
-                    drawimage.text((xmin,ymin),label,rgb)
-
-                output = BytesIO()
-                image.save(output, format="png")
-                n = 3600
-                binary = output.getvalue()
-                chunks = [binary[i:i+n] for i in range(0, len(binary), n)]
-                for chunk in chunks:
-                    resp.BinaryImage.Write(chunk)
-            # Drawing the masks of each detected object on the image
-            elif res[0].__contains__("mask"):
-                resp = iris.cls('PEX.Msg.ImageDisplay')._New()
-                coloredimage = image.copy()
-                for object in res:
-                    r = random.randint(0,255)
-                    g = random.randint(0,255)
-                    b = random.randint(0,255)
-                    rgb = (r,g,b)
-                    try:
-                        bNwimage = Image.open(BytesIO(base64.b64decode(object['mask'])))
-                    except:
-                        bNwimage = object['mask']
-                    coloredimage = Image.composite(Image.new('RGBA', image.size, color = rgb),coloredimage,bNwimage)
-                
-                mask = Image.new('RGBA', image.size, color = (255,255,255))
-                mask.putalpha(185)
-                image = Image.composite(coloredimage,image,mask)
-
-                output = BytesIO()
-                image.save(output, format="png")
-                n = 3600
-                binary = output.getvalue()
-                chunks = [binary[i:i+n] for i in range(0, len(binary), n)]
-                for chunk in chunks:
-                    resp.BinaryImage.Write(chunk)
-            # The default case where the output is not an image.
-            else:
-                resp.output = res
-        except Exception as e:
-            self.log_info(str(e))
         return resp
 
