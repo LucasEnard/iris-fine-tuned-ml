@@ -1,0 +1,34 @@
+with open("misc/dataset/test.csv",'r') as test:
+    with open("misc/dataset/train.csv",'r') as train:
+        with open("misc/dataset/dataset.txt",'w') as dataset:
+            for line in test.readlines():
+                # line = line.replace("'","''")
+                # line = list(line)
+                # line[0] = "'"
+                # line[2] = "'"
+                # line[3] = ";"
+                # line[4] = "'"
+                # line[-2] = "'"
+                # line = ''.join(line)
+                dataset.writelines(line)
+            lines = train.readlines()
+            for line in lines[:-1]:
+                # line = line.replace("'","''")
+                # line = list(line)
+                # line[0] = "'"
+                # line[2] = "'"
+                # line[3] = ";"
+                # line[4] = "'"
+                # line[-2] = "'"
+                # line = ''.join(line)
+                dataset.writelines(line)
+            lastline = lines[-1]
+            # lastline = lastline.replace("'","''")
+            # lastline = list(lastline)
+            # lastline[0] = "'"
+            # lastline[2] = "'"
+            # lastline[3] = ";"
+            # lastline[4] = "'"
+            # lastline[-2] = "'"
+            # lastline = ''.join(lastline)
+            dataset.writelines(lastline)

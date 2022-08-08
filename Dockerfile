@@ -18,6 +18,7 @@ USER ${ISC_PACKAGE_MGRUSER}
 
 RUN \
 	--mount=type=bind,src=src,dst=src \
+	--mount=type=bind,src=misc,dst=misc \
 	--mount=type=bind,src=iris.script,dst=/tmp/iris.script \
 	--mount=type=bind,src=Installer.cls,dst=Installer.cls \
 	iris start IRIS && \

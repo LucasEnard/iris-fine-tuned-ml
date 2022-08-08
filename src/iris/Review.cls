@@ -1,9 +1,9 @@
 Class iris.Review Extends %Persistent
 {
 
-Property Label As %String;
+Property ReviewLabel As %String;
 
-Property Text As %String(MAXLEN = "");
+Property ReviewText As %String(MAXLEN = 300000);
 
 Storage Default
 {
@@ -12,10 +12,10 @@ Storage Default
 <Value>%%CLASSNAME</Value>
 </Value>
 <Value name="2">
-<Value>Label</Value>
+<Value>ReviewLabel</Value>
 </Value>
 <Value name="3">
-<Value>Text</Value>
+<Value>ReviewText</Value>
 </Value>
 </Data>
 <DataLocation>^iris.ReviewD</DataLocation>

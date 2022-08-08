@@ -1,0 +1,13 @@
+with open("misc/dataset/test.csv",'r') as test:
+    with open("misc/dataset/train.csv",'r') as train:
+        lines = test.readlines()
+        lines.append(train.readlines())
+        i = 0
+        num_csv = 0
+        for line in lines:
+            with open(f"misc/dataset/dataset{num_csv}.txt",'w') as dataset:
+                dataset.writelines(line)
+            i+=1
+            num_csv = i%100000
+                    
+
