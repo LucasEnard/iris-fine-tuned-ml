@@ -1,1 +1,0 @@
-python3 -m spacy train config.cfg --paths.train ./training_data.spacy --paths.dev ./training_data

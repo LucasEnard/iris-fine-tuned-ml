@@ -1,0 +1,10 @@
+do $SYSTEM.SQL.Execute("LOAD DATA FROM FILE /irisdev/app/misc/dataset.csv INTO iris.Review")
+
+do $SYSTEM.SQL.Execute("LOAD DATA FROM FILE /irisdev/ap INTO iris.Review")
+
+
+SET result=$SYSTEM.SQL.Execute("LOAD DATA FROM FILE '/irisdev/app/misc/dataset/dataset.txt' INTO iris.Review")
+DO result.%Display()
+
+SET sc=##class(community.csvgen).Generate("/irisdev/app/misc/dataset/dataset.csv")
+RETURN sc

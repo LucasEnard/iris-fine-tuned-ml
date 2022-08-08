@@ -1,19 +1,21 @@
  do $SYSTEM.OBJ.Load("/irisdev/app/Installer.cls", "ck")
- set sc = ##class(App.Installer).setup() 
+ set sc = ##class(App.Installer).setup()
 
  zn "IRISAPP"
- zpm "install pex-embbeded-python" 
+ zpm "install pex-embbeded-python"
+ zpm "install csvgen"
  do $System.OBJ.LoadDir("/irisdev/app/src","ck",,1)
  zw $SYSTEM.OBJ.ImportDir("/irisdev/app/src", "*.cls", "cubk", .tErrors, 1)
  zpm "install sslclient"
 
  //Register Python code
-  
- zw ##class(Grongier.PEX.Utils).RegisterComponent("bo","HFOperation","/irisdev/app/src/",1,"Python.HFOperation")
- zw ##class(Grongier.PEX.Utils).RegisterComponent("bo","MLOperation","/irisdev/app/src/",1,"Python.MLOperation")
+
+ // zw ##class(Grongier.PEX.Utils).RegisterComponent("bo","HFOperation","/irisdev/app/src/",1,"Python.HFOperation")
 
  set ^EnsPortal.Settings("SuperUser","LastProduction")	= "iris.Production"
- 
+
+ //do ##class(community.csvgen).Generate("/irisdev/app/misc/dataset/dataset.csv")
+
  zn "%SYS"
  Do ##class(Security.Users).UnExpireUserPasswords("*")
 
