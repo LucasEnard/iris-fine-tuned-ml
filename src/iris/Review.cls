@@ -3,7 +3,7 @@ Class iris.Review Extends %Persistent
 
 Property ReviewLabel As %String;
 
-Property ReviewText As %String(MAXLEN = 300000);
+Property ReviewText As %VarString;
 
 Storage Default
 {
@@ -20,7 +20,6 @@ Storage Default
 </Data>
 <DataLocation>^iris.ReviewD</DataLocation>
 <DefaultData>ReviewDefaultData</DefaultData>
-<ExtentSize>700000</ExtentSize>
 <IdLocation>^iris.ReviewD</IdLocation>
 <IndexLocation>^iris.ReviewI</IndexLocation>
 <StreamLocation>^iris.ReviewS</StreamLocation>
