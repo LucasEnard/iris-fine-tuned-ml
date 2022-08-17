@@ -57,6 +57,8 @@ Moreover we also give you a DataSet to train the bert model on, this dataset wa@
 
 To use the script, if you are inside the container, you can execute it without worry, if you are in local, you may need to `pip3 install requests` and `pip3 install beautifulsoup4`
 
+See the output :
+![Download OutPut](https://user-images.githubusercontent.com/77791586/185119729-defa55d2-7d11-408e-b57e-2c00eb7823d8.png)
 
 ## 4.2. Settings
 
@@ -110,6 +112,9 @@ Here is an example that train on the first 20 rows ( This isn't a proper trainin
     "num_train_epochs":1
 }
 ```
+
+As for example :
+![Train request](https://user-images.githubusercontent.com/77791586/185121527-696becaa-8b3e-4535-8156-1d40423e622b.png)
 
 As you can see, you must enter
 - `table` to use.
