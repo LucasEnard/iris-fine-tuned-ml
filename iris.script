@@ -6,8 +6,16 @@
  zpm "install csvgen"
  do $System.OBJ.LoadDir("/irisdev/app/src","ck",,1)
  zw $SYSTEM.OBJ.ImportDir("/irisdev/app/src", "*.cls", "cubk", .tErrors, 1)
- //do ##class(%Library.EnsembleMgr).EnableNamespace("IRISAPP",1)
- //do $SYSTEM.SQL.Schema.ImportDDL("/irisdev/app/misc/dataset/init.sql","/irisdev/app/sql.log","IRIS")
+
+ set fncsv="/irisdev/app/misc/dataset/dataset.txt"
+ set tablename="iris.Review"
+ set dlm=";"
+
+ set importsql="LOAD DATA FROM FILE '"_fncsv_"'"_" INTO "_tablename_" USING {""from"":{""file"":{""columnseparator"":"""_dlm_""""_",""header"":""1"""_"}}}"
+ set tStatement = ##class(%SQL.Statement).%New()
+ set sc = tStatement.%Prepare(importsql)
+ set rset = tStatement.%Execute()
+
  zpm "install sslclient"
 
  //Register Python code

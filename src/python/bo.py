@@ -149,11 +149,13 @@ class TuningOperation(BusinessOperation):
 
 
 class MLOperation(BusinessOperation):
-    def on_init():
+    def on_init(self):
         if not hasattr(self,"path"):
             self.path = "/irisdev/app/src/model/"
         if not hasattr(self,"model_name"):
             self.model_name = "bert-base-cased"
+        if not hasattr(self,"task"):
+            self.task = "text-classification"
 
         # Get all the attributes of self to put it into the model
         config_attr = set(dir(self)).difference(set(dir(BusinessOperation))).difference(set(['model_name','path','on_ml_request']))
@@ -162,15 +164,16 @@ class MLOperation(BusinessOperation):
             config_dict[attr] = getattr(self,attr)
         # Loading the model and the config from the folder.
         try:
-            self.pipeline = pipeline(self.path + self.model_name, **config_dict)
+            self.pipeline = pipeline(model=self.path + self.model_name, **config_dict)
             self.log_info("Model and config loaded")
         except Exception as e:
             self.log_info("Error in loading the model")
             self.log_info(str(e))
         
     def on_ml_request(self,request:MLRequest):
-        args = dict()
-        for key,value in request.__dict__.items():
-            if key[0] != "_" and key not in [""]:
-                args[key] = value
-        return MLResponse(self.pipeline(**args))
+        resp = MLResponse()
+        resp.response = self.pipeline([request.inputs])
+        return resp
+
+    def on_message(self,request):
+        return request

@@ -23,5 +23,5 @@ class MLRequest(Message):
 
 @dataclass()
 class MLResponse(Message):
-    pass
+    response = None
 
