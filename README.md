@@ -10,6 +10,7 @@
   - [4.1. Download the model](#41-download-the-model)
   - [4.2. Settings](#42-settings)
   - [4.3. Train the model](#43-train-the-model)
+  - [4.4. Replace the model](#44-replace-the-model)
 - [5. Use the model](#5-use-the-model)
   - [5.1. Settings](#51-settings)
   - [5.2. Test the model](#52-test-the-model)
@@ -132,7 +133,7 @@ Now access the `Python.TuningOperation`, and select in the right tab `log` ; Her
 Once it is over, you will see a log saying that the new model was saved in a temporary folder.<br>
 Now access the `Python.TuningOperation`, and select in the right tab `message` and select the last one by clicking on it's header. Here you can see the advancement of the training and evaluations and at the end you can have access to the Metrics of the old and the new model for you to compare.
 
-## Replace the model
+## 4.4. Replace the model
 **If you want to keep the old model**, nothing must be done, the old one will stay on the non-temporary folder and is still loaded for further training.
 
 **If you want to keep the new model**, you must click on the `Python.TuningOperation`, and select in the right tab `Actions` and test.
@@ -156,7 +157,7 @@ Click Invoke Testing Service and see the response message. The new model was mov
 Training a model is interesting but you can also try it out.
 
 ## 5.1. Settings
-If you want to use the bert-base-cased model, and you did downloaded it using the script, nothing needs to be added to the settings and you can advance to the [test the model part](#test-the-model).
+If you want to use the bert-base-cased model, and you did downloaded it using the script, nothing needs to be added to the settings and you can advance to the [test the model part](#52-test-the-model).
 
 If you want to use your own model, click on the `Python.TuningOperation`, and select in the right tab `Settings`, then `Python` then in the `%settings` part, enter the parameter to add to the pipeline.
 ## 5.2. Test the model
