@@ -1,0 +1,10 @@
+{
+    "columns":"ReviewLabel,ReviewText",
+    "table":"iris.Review",
+    "limit":20,
+    "p_of_train":0.8,
+    "output_dir":"/irisdev/app/src/model/checkpoints",
+    "evaluation_strategy":"steps",
+    "learning_rate":0.01,
+    "num_train_epochs":1
+}

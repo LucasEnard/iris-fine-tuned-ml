@@ -1,9 +1,13 @@
+from random import shuffle
+
+
 with open("misc/dataset/test.csv",'r') as test:
     with open("misc/dataset/train.csv",'r') as train:
         with open(f"misc/dataset/datasets/dataset.txt",'w') as alldata:
             alldata.writelines("ReviewLabel;ReviewText\n")
             lines = test.readlines()
             lines = lines + train.readlines()
+            shuffle(lines)
             long = len(lines)
             for num_csv in range(1,11):
                 with open(f"misc/dataset/datasets/dataset{num_csv}.txt",'w') as dataset:
