@@ -132,6 +132,7 @@ Now access the `Python.TuningOperation`, and select in the right tab `log` ; Her
 Once it is over, you will see a log saying that the new model was saved in a temporary folder.<br>
 Now access the `Python.TuningOperation`, and select in the right tab `message` and select the last one by clicking on it's header. Here you can see the advancement of the training and evaluations and at the end you can have access to the Metrics of the old and the new model for you to compare.
 
+## Replace the model
 **If you want to keep the old model**, nothing must be done, the old one will stay on the non-temporary folder and is still loaded for further training.
 
 **If you want to keep the new model**, you must click on the `Python.TuningOperation`, and select in the right tab `Actions` and test.
