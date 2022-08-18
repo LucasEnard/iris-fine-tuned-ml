@@ -128,7 +128,7 @@ After that, the other parameters are up to you and can be anything according to 
 
 **NOTE** that the batch size for training and testing is automatically calculated if not input in the request. ( It's the biggest divider of the number of rows that's less than the square root of the number of row and less than 32 )
 
-Click Invoke Testing Service and close the testing widow without waiting.<br>
+Click Invoke Testing Service and close the testing window without waiting.<br>
 Now access the `Python.TuningOperation`, and select in the right tab `log` ; Here you can see the advancement of the training and evaluations.<br>
 Once it is over, you will see a log saying that the new model was saved in a temporary folder.<br>
 Now access the `Python.TuningOperation`, and select in the right tab `message` and select the last one by clicking on it's header. Here you can see the advancement of the training and evaluations and at the end you can have access to the Metrics of the old and the new model for you to compare.
