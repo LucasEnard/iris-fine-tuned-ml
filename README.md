@@ -34,7 +34,7 @@ The very first time, it may take a few minutes to build the image correctly and 
 
 ## 2.2. Access the Production
 
-Following this link, access the production : Access the Production
+Following this link, access the production : [Access the Production](http://localhost:52795/csp/irisapp/EnsPortal.ProductionConfig.zen?PRODUCTION=iris.Production)
 
 ## 2.3. Closing the Production
 
