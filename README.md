@@ -24,7 +24,7 @@ Fine-Tuning of Machine Learning models in IRIS using Python based on a IRIS Data
 The objective of this GitHub is to simulate a simple use case of Machine Learning in IRIS :<br>We have an IRIS Operation that, on command, can fetch data from the IRIS DataBase to train an existing model in local, then if the new model is better, the user can override the old one with the new one.<br>That way, every x days, if the DataBase has been extended by the users for example, you can train the model on the new data or on all the data and choose to keep or let go this new model.<br>We are aware that training the model multiple times on the same data is detrimental but this is just an example of usage.<br>Moreover the user can of course use the current model to predict some results.
 
 # 2. Installation
-## 2.1. Starting the Production
+## 2.1. Starting the Container
 
 While in the iris-fine-tuned-ml folder, open a terminal and enter :
 ```
@@ -36,7 +36,7 @@ The very first time, it may take a few minutes to build the image correctly and 
 
 Following this link, access the production : [Access the Production](http://localhost:52795/csp/irisapp/EnsPortal.ProductionConfig.zen?PRODUCTION=iris.Production)
 
-## 2.3. Closing the Production
+## 2.3. Closing the Container
 ```
 docker-compose down
 ```
